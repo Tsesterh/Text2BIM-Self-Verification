@@ -130,6 +130,4 @@ This is useful both as a reproduction artifact for the paper and as a reference 
 
 ## Citation
 
-If you use this repository in academic work, cite the paper:
-
-*A Self-Verification Framework Toward Reliable Text-to-BIM Generation*.
+> Citation coming soon.
