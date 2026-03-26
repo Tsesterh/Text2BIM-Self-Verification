@@ -1,0 +1,118 @@
+{
+  "iteration": 5,
+  "ifc_path": "run_out/run_1770915001/iter_5/model.ifc",
+  "spec_path": "run_out/run_1770915001/spec.md",
+  "ids_path": "run_out/run_1770915001/requirements.ids",
+  "review_report_path": "run_out/run_1770915001/iter_5/review_report.json",
+  "ids_report_path": "run_out/run_1770915001/iter_5/ids_report.json",
+  "reviewer_trace_path": "run_out/run_1770915001/iter_5/reviewer_trace.jsonl",
+  "modifier_trace_path": "run_out/run_1770915001/iter_5/modifier_trace.jsonl",
+  "specifier_trace_path": "run_out/run_1770915001/specifier_trace.jsonl",
+  "review_summary": {
+    "pass": 0,
+    "fail": 10
+  },
+  "ids_summary": {
+    "pass": 0,
+    "fail": 0,
+    "unknown": 9
+  },
+  "patch_plan": {
+    "patch_plan": [
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-001",
+        "source": "Reviewer",
+        "task": "Ensure there are exactly 2 IfcBuildingStorey with different Elevation values, and every IfcSpace is contained in exactly one of these storeys via IfcRelContainedInSpatialStructure.",
+        "evidence": {
+          "problem": "No tool-returned proof of exactly-2-storey structure and complete space assignment."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-002",
+        "source": "Reviewer",
+        "task": "Create exactly 8 IfcSpace and assign 4 to each storey using IfcRelContainedInSpatialStructure (storey.ContainsElements).",
+        "evidence": {
+          "problem": "No tool-returned per-storey IfcSpace counts."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-003",
+        "source": "Reviewer",
+        "task": "Give every IfcSpace a closed IfcSweptSolid/IfcFacetedBrep body representation and attach a quantity (e.g., Qto_SpaceBaseQuantities.NetFloorArea) or ensure geometry supports robust area calculation.",
+        "evidence": {
+          "problem": "No tool-returned confirmation of closed solids and net floor area > 0 for every space."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-004",
+        "source": "Reviewer",
+        "task": "Ensure each IfcSpace profile/footprint is a simple closed polygon (no self-intersections) and the resulting 3D solid is valid (no self-intersections).",
+        "evidence": {
+          "problem": "No tool-returned boundary loop validation."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-005",
+        "source": "Reviewer",
+        "task": "Place Level 2 spaces with z-min above (or equal to) Level 2 storey elevation and ensure Level 1 spaces do not extend above Level 2 elevation; prevent any space from spanning both storeys.",
+        "evidence": {
+          "problem": "No tool-returned z-extent vs elevation checks."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-006",
+        "source": "Reviewer",
+        "task": "Model the roof as two planar sloped faces meeting at a single straight ridge line (gable). Avoid hip facets and avoid horizontal roof faces.",
+        "evidence": {
+          "problem": "No tool-returned geometric proof of gable topology (2 planes + ridge)."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-007",
+        "source": "Reviewer",
+        "task": "Center the gable ridge in plan over the footprint; align ridge midpoint to footprint centroid within 10% of max footprint dimension.",
+        "evidence": {
+          "problem": "No tool-returned ridge centering metric."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-008",
+        "source": "Reviewer",
+        "task": "Ensure exterior wall axis endpoints meet (within 0.02m) in a closed loop around Level 1 spaces; fix gaps by adjusting wall endpoints/placements.",
+        "evidence": {
+          "problem": "No tool-returned endpoint gap metric for exterior perimeter continuity."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-009",
+        "source": "Reviewer",
+        "task": "Ensure all walls/slabs/roof have positive thickness and valid solids so computed volume > 0 (no zero-thickness extrusions).",
+        "evidence": {
+          "problem": "No tool-returned positive volume verification across elements."
+        }
+      },
+      {
+        "priority": "P0",
+        "requirement_id": "REQ-010",
+        "source": "Reviewer",
+        "task": "Remove/repair any circular placement references; ensure all IfcLocalPlacement chains resolve to finite transforms (no NaN/Inf).",
+        "evidence": {
+          "problem": "No tool-returned placement finiteness report."
+        }
+      }
+    ],
+    "done_when": [
+      "no_P0_remaining"
+    ]
+  },
+  "modifier_log": "MCP modifier completed. See MCP server logs for tool-level details."
+}

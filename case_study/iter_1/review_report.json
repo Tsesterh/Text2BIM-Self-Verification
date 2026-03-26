@@ -1,0 +1,202 @@
+{
+  "summary": {
+    "pass": 0,
+    "fail": 10
+  },
+  "checks": [
+    {
+      "requirement_id": "REQ-001",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for storey list/elevations (inspection script results could not be retrieved from execute_ifc_code_tool output).",
+        "ifc_path_loaded": "/Users/tobi/Documents/Projekte/Show2Instruct/BIM_Agent-1/run_out/run_1770915001/iter_1/model.ifc",
+        "tool_calls": [
+          "functions.load_ifc_file",
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify storey count, distinct elevations, or that all spaces are assigned to one of exactly 2 storeys, because execute_ifc_code_tool returned no retrievable computed output."
+    },
+    {
+      "requirement_id": "REQ-002",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for space count and per-storey containment.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify exactly 8 IfcSpace total nor 4 per storey."
+    },
+    {
+      "requirement_id": "REQ-003",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for space solid/volume or net floor area calculations.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify each IfcSpace has a closed 3D solid and net floor area > 0."
+    },
+    {
+      "requirement_id": "REQ-004",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for footprint loop closure / self-intersection checks.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify that room boundary loops are closed and non-self-intersecting in plan."
+    },
+    {
+      "requirement_id": "REQ-005",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for space Z extents vs storey elevations.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify Level 2 spaces are vertically above Level 1 and that no space spans both storeys."
+    },
+    {
+      "requirement_id": "REQ-006",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for roof face normals / planar face clustering to prove a gable roof.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify roof has exactly two main planar faces with opposite slopes meeting at a single straight ridge line, and that faces are not horizontal."
+    },
+    {
+      "requirement_id": "REQ-007",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for ridge line midpoint and footprint centroid comparison.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify ridge is centered over footprint within 10% tolerance."
+    },
+    {
+      "requirement_id": "REQ-008",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for wall endpoint gap calculation around perimeter.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify external walls form a closed perimeter with no gaps > 20 mm."
+    },
+    {
+      "requirement_id": "REQ-009",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for computed element volumes of walls/slabs/roofs.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify non-zero thickness/volume and no non-positive volumes."
+    },
+    {
+      "requirement_id": "REQ-010",
+      "status": "fail",
+      "evidence": {
+        "reason": "Tool execution did not return inspectable values for placement resolution / NaN/Inf / circular reference detection.",
+        "tool_calls": [
+          "functions.execute_ifc_code_tool"
+        ]
+      },
+      "notes": "Could not verify all local placements resolve without circular references and yield finite coordinates."
+    }
+  ],
+  "issues": [
+    {
+      "requirement_id": "REQ-001",
+      "status": "fail",
+      "fix_hint": "Ensure the IFC contains exactly 2 IfcBuildingStorey with different Elevation values, and every IfcSpace is related via IfcRelContainedInSpatialStructure to one of those storeys.",
+      "evidence": {
+        "blocking_issue": "Inspection tooling did not provide retrievable computed results from execute_ifc_code_tool, preventing verification."
+      }
+    },
+    {
+      "requirement_id": "REQ-002",
+      "status": "fail",
+      "fix_hint": "Create exactly 8 IfcSpace and assign 4 to each storey using IfcRelContainedInSpatialStructure.",
+      "evidence": {
+        "blocking_issue": "Counts/containment could not be verified due to missing retrievable tool output."
+      }
+    },
+    {
+      "requirement_id": "REQ-003",
+      "status": "fail",
+      "fix_hint": "Give each IfcSpace a valid closed solid (e.g., IfcExtrudedAreaSolid with closed profile) and provide quantity/geometry sufficient to compute net floor area > 0.",
+      "evidence": {
+        "blocking_issue": "Space volumes/areas could not be verified due to missing retrievable tool output."
+      }
+    },
+    {
+      "requirement_id": "REQ-004",
+      "status": "fail",
+      "fix_hint": "Ensure each space footprint polyline is a closed, simple polygon (no self-intersections) and that swept profiles are valid.",
+      "evidence": {
+        "blocking_issue": "Footprint extraction/self-intersection test results not retrievable."
+      }
+    },
+    {
+      "requirement_id": "REQ-005",
+      "status": "fail",
+      "fix_hint": "Place Level 2 spaces fully above Level 1 elevation and avoid extrusions spanning both storeys; align space placements with storey elevations.",
+      "evidence": {
+        "blocking_issue": "Z extents vs elevations not retrievable."
+      }
+    },
+    {
+      "requirement_id": "REQ-006",
+      "status": "fail",
+      "fix_hint": "Model the roof as a true gable: two sloped planar faces meeting at a straight ridge (IfcRoof representation should reflect two dominant opposing face normals).",
+      "evidence": {
+        "blocking_issue": "Roof face-normal analysis results not retrievable."
+      }
+    },
+    {
+      "requirement_id": "REQ-007",
+      "status": "fail",
+      "fix_hint": "Center the ridge over the footprint (ridge midpoint near footprint centroid within 10% of max footprint dimension).",
+      "evidence": {
+        "blocking_issue": "Footprint centroid / ridge midpoint comparison not retrievable."
+      }
+    },
+    {
+      "requirement_id": "REQ-008",
+      "status": "fail",
+      "fix_hint": "Ensure exterior wall axes connect end-to-end around the footprint and close the loop; fix any endpoint gaps > 0.02 m.",
+      "evidence": {
+        "blocking_issue": "Wall axis endpoint gap calculation results not retrievable."
+      }
+    },
+    {
+      "requirement_id": "REQ-009",
+      "status": "fail",
+      "fix_hint": "Assign wall/slab/roof solids with positive thickness and verify geometry produces positive (non-zero) computed volume.",
+      "evidence": {
+        "blocking_issue": "Element volume checks not retrievable."
+      }
+    },
+    {
+      "requirement_id": "REQ-010",
+      "status": "fail",
+      "fix_hint": "Audit IfcLocalPlacement chains to avoid circular references and ensure all transforms are finite; fix any invalid placements.",
+      "evidence": {
+        "blocking_issue": "Placement resolution check results not retrievable."
+      }
+    }
+  ]
+}

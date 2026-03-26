@@ -1,0 +1,174 @@
+{
+  "summary": {
+    "pass": 0,
+    "fail": 10
+  },
+  "checks": [
+    {
+      "requirement_id": "REQ-001",
+      "status": "fail",
+      "evidence": {
+        "storeys_found": "Tooling issue: storey/space extraction executed but returned no result object (tool output was null).",
+        "note": "A subsequent tool run showed storeys and spaces exist, but the exact count of distinct storeys with non-equal elevations and complete space assignment could not be evidenced in a single successful returned dataset."
+      },
+      "notes": "Could not produce tool-returned evidence that there are exactly 2 storeys with non-equal elevations and that all IfcSpace are assigned to one of these storeys."
+    },
+    {
+      "requirement_id": "REQ-002",
+      "status": "fail",
+      "evidence": {
+        "space_counts_by_storey": "Tooling issue: storey->space containment counts not returned in a single successful dataset.",
+        "spaces_total": "Tooling issue: count exists in later run but per-storey split could not be evidenced."
+      },
+      "notes": "Could not evidence exactly 8 rooms total and exactly 4 per storey based on IfcSpace containment in each IfcBuildingStorey."
+    },
+    {
+      "requirement_id": "REQ-003",
+      "status": "fail",
+      "evidence": {
+        "space_solid_and_area": "Tooling issue: geometry checks attempted; some geometry APIs not available in this environment in one run, and later runs did not return a consolidated per-space pass/fail with computed net floor area.",
+        "note": "A bbox-area proxy was computed in code, but net floor area per IFC definition was not computed and no per-space solid closure validation was returned."
+      },
+      "notes": "No tool-evidenced confirmation that every IfcSpace has a valid closed solid and computable net floor area > 0."
+    },
+    {
+      "requirement_id": "REQ-004",
+      "status": "fail",
+      "evidence": {
+        "self_intersection_checks": "No tool-returned plan loop / boundary loop self-intersection analysis for each space was produced."
+      },
+      "notes": "No evidence that room boundary loops are closed and non-self-intersecting in plan, nor that room solids do not self-intersect."
+    },
+    {
+      "requirement_id": "REQ-005",
+      "status": "fail",
+      "evidence": {
+        "vertical_stacking": "Tooling issue: stacking check code executed but tool returned null output, so no z-extent vs storey elevation evidence is available."
+      },
+      "notes": "Could not evidence that Level 2 spaces are vertically above Level 1 and that no space spans both storeys."
+    },
+    {
+      "requirement_id": "REQ-006",
+      "status": "fail",
+      "evidence": {
+        "gable_geometry_analysis": "Tooling issue: roof face-normal clustering analysis executed but tool returned null output, so no evidence of exactly two opposing sloped planes meeting at one straight ridge line."
+      },
+      "notes": "Could not evidence that the roof is a gable roof with two main planar faces and a single straight ridge line; also could not confirm faces are not horizontal."
+    },
+    {
+      "requirement_id": "REQ-007",
+      "status": "fail",
+      "evidence": {
+        "ridge_centering": "Tooling issue: footprint centroid vs roof center computation executed but tool returned null output."
+      },
+      "notes": "Could not evidence ridge midpoint centered over footprint within 10% tolerance."
+    },
+    {
+      "requirement_id": "REQ-008",
+      "status": "fail",
+      "evidence": {
+        "wall_perimeter_gap_check": "Tooling issue: wall axis endpoint nearest-gap computation executed but tool returned null output.",
+        "tolerance_m": 0.02
+      },
+      "notes": "Could not evidence that external walls form a closed perimeter around Level 1 spaces with no gaps > 20mm."
+    },
+    {
+      "requirement_id": "REQ-009",
+      "status": "fail",
+      "evidence": {
+        "volume_check": "Tooling issue: attempted to compute volumes for walls/slabs/roof; tool-returned dataset with non-zero volumes was not available."
+      },
+      "notes": "Could not evidence that all wall, slab, and roof elements have non-zero positive computed volume."
+    },
+    {
+      "requirement_id": "REQ-010",
+      "status": "fail",
+      "evidence": {
+        "placement_finiteness": "Tooling issue: placement matrix finiteness check executed but tool returned null output."
+      },
+      "notes": "Could not evidence all placements resolve without circular references and yield finite coordinates."
+    }
+  ],
+  "issues": [
+    {
+      "requirement_id": "REQ-001",
+      "status": "fail",
+      "fix_hint": "Ensure there are exactly 2 IfcBuildingStorey with different Elevation values, and every IfcSpace is contained in exactly one of these storeys via IfcRelContainedInSpatialStructure.",
+      "evidence": {
+        "problem": "No tool-returned proof of exactly-2-storey structure and complete space assignment."
+      }
+    },
+    {
+      "requirement_id": "REQ-002",
+      "status": "fail",
+      "fix_hint": "Create exactly 8 IfcSpace and assign 4 to each storey using IfcRelContainedInSpatialStructure (storey.ContainsElements).",
+      "evidence": {
+        "problem": "No tool-returned per-storey IfcSpace counts."
+      }
+    },
+    {
+      "requirement_id": "REQ-003",
+      "status": "fail",
+      "fix_hint": "Give every IfcSpace a closed IfcSweptSolid/IfcFacetedBrep body representation and attach a quantity (e.g., Qto_SpaceBaseQuantities.NetFloorArea) or ensure geometry supports robust area calculation.",
+      "evidence": {
+        "problem": "No tool-returned confirmation of closed solids and net floor area > 0 for every space."
+      }
+    },
+    {
+      "requirement_id": "REQ-004",
+      "status": "fail",
+      "fix_hint": "Ensure each IfcSpace profile/footprint is a simple closed polygon (no self-intersections) and the resulting 3D solid is valid (no self-intersections).",
+      "evidence": {
+        "problem": "No tool-returned boundary loop validation."
+      }
+    },
+    {
+      "requirement_id": "REQ-005",
+      "status": "fail",
+      "fix_hint": "Place Level 2 spaces with z-min above (or equal to) Level 2 storey elevation and ensure Level 1 spaces do not extend above Level 2 elevation; prevent any space from spanning both storeys.",
+      "evidence": {
+        "problem": "No tool-returned z-extent vs elevation checks."
+      }
+    },
+    {
+      "requirement_id": "REQ-006",
+      "status": "fail",
+      "fix_hint": "Model the roof as two planar sloped faces meeting at a single straight ridge line (gable). Avoid hip facets and avoid horizontal roof faces.",
+      "evidence": {
+        "problem": "No tool-returned geometric proof of gable topology (2 planes + ridge)."
+      }
+    },
+    {
+      "requirement_id": "REQ-007",
+      "status": "fail",
+      "fix_hint": "Center the gable ridge in plan over the footprint; align ridge midpoint to footprint centroid within 10% of max footprint dimension.",
+      "evidence": {
+        "problem": "No tool-returned ridge centering metric."
+      }
+    },
+    {
+      "requirement_id": "REQ-008",
+      "status": "fail",
+      "fix_hint": "Ensure exterior wall axis endpoints meet (within 0.02m) in a closed loop around Level 1 spaces; fix gaps by adjusting wall endpoints/placements.",
+      "evidence": {
+        "problem": "No tool-returned endpoint gap metric for exterior perimeter continuity."
+      }
+    },
+    {
+      "requirement_id": "REQ-009",
+      "status": "fail",
+      "fix_hint": "Ensure all walls/slabs/roof have positive thickness and valid solids so computed volume > 0 (no zero-thickness extrusions).",
+      "evidence": {
+        "problem": "No tool-returned positive volume verification across elements."
+      }
+    },
+    {
+      "requirement_id": "REQ-010",
+      "status": "fail",
+      "fix_hint": "Remove/repair any circular placement references; ensure all IfcLocalPlacement chains resolve to finite transforms (no NaN/Inf).",
+      "evidence": {
+        "problem": "No tool-returned placement finiteness report."
+      }
+    }
+  ]
+}

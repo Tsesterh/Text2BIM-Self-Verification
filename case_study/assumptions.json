@@ -1,0 +1,5 @@
+[
+  "IfcRoof.PredefinedType supports the enumeration value GABLE_ROOF in the authoring/export pipeline; if not, provide an equivalent classification or property and validate gable geometry via REQ-006.",
+  "Timber construction is validated via presence of a material with name exactly 'Wood' assigned to IfcWall/IfcSlab/IfcRoof; if using more specific names (e.g., 'Timber', 'CLT'), update the IDS Material.value accordingly.",
+  "Room counting is based on IfcSpace instances representing rooms; circulation spaces (e.g., hall) are included as rooms unless excluded by naming convention (not specified)."
+]

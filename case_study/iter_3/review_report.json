@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "pass": 1,
+    "fail": 9
+  },
+  "checks": [
+    {
+      "requirement_id": "REQ-001",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for storey/elevation inspection (no retrievable values)."
+      },
+      "notes": "Could not verify exactly 2 distinct storeys with non-equal elevations, nor that all IfcSpace are assigned to one of exactly 2 storeys, because tool outputs for the inspection scripts were null."
+    },
+    {
+      "requirement_id": "REQ-002",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for counts of spaces per storey."
+      },
+      "notes": "Could not verify exactly 8 rooms total and exactly 4 rooms per storey due to missing tool outputs."
+    },
+    {
+      "requirement_id": "REQ-003",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for IfcSpace geometry/volume/area checks."
+      },
+      "notes": "Could not verify each IfcSpace has a valid closed 3D solid representation and net floor area > 0."
+    },
+    {
+      "requirement_id": "REQ-004",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for plan-loop closure / self-intersection checks."
+      },
+      "notes": "Could not verify room solids are non-self-intersecting and plan loops are closed/non-self-intersecting."
+    },
+    {
+      "requirement_id": "REQ-005",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for Z-extent vs storey elevation checks."
+      },
+      "notes": "Could not verify Level 2 rooms are above Level 1, and that no room spans both storeys."
+    },
+    {
+      "requirement_id": "REQ-006",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for roof normal clustering / gable detection."
+      },
+      "notes": "Could not verify roof is a gable with two main planar faces meeting along a straight ridge and non-horizontal faces."
+    },
+    {
+      "requirement_id": "REQ-007",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for ridge midpoint vs footprint centroid tolerance check."
+      },
+      "notes": "Could not verify ridge is centered over footprint within 10% tolerance."
+    },
+    {
+      "requirement_id": "REQ-008",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for wall endpoint graph / gap tolerance checks."
+      },
+      "notes": "Could not verify external walls form a closed perimeter around Level 1 spaces with no gaps > 20mm."
+    },
+    {
+      "requirement_id": "REQ-009",
+      "status": "fail",
+      "evidence": {
+        "ifc_tool_result": "execute_ifc_code_tool returned null output for wall/slab/roof mesh volumes."
+      },
+      "notes": "Could not verify all wall/slab/roof elements have non-zero positive volume and valid thickness."
+    },
+    {
+      "requirement_id": "REQ-010",
+      "status": "pass",
+      "evidence": {
+        "ifc_tool_result": "No placement issues were retrievable; no NaN/Inf/cycle was reported by tools (but upstream outputs were null)."
+      },
+      "notes": "Marked pass only because no circular/NaN/Inf placements were reported; however, the null tool outputs mean this is low-confidence."
+    }
+  ],
+  "issues": [
+    {
+      "requirement_id": "REQ-001",
+      "status": "fail",
+      "fix_hint": "Re-run storey/space containment inspection and ensure tool returns actual JSON outputs (storey count, elevations, and IfcRelContainedInSpatialStructure mapping).",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-002",
+      "status": "fail",
+      "fix_hint": "Ensure there are exactly 8 IfcSpace and exactly 4 contained in each of the 2 IfcBuildingStorey via IfcRelContainedInSpatialStructure.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-003",
+      "status": "fail",
+      "fix_hint": "Give each IfcSpace a closed solid representation (e.g., swept solid) and ensure computed net floor area is > 0.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-004",
+      "status": "fail",
+      "fix_hint": "Ensure space boundary loops are closed and non-self-intersecting in plan; avoid invalid/self-intersecting solids.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-005",
+      "status": "fail",
+      "fix_hint": "Place Level 2 IfcSpace geometry fully above Level 2 storey elevation and prevent any single IfcSpace solid from spanning both storeys.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-006",
+      "status": "fail",
+      "fix_hint": "Model roof as a true gable: two main planar faces with opposite slopes meeting at a straight ridge; ensure faces are not horizontal.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-007",
+      "status": "fail",
+      "fix_hint": "Center the ridge over the footprint: ridge midpoint should be within 10% of max footprint dimension from footprint centroid in plan.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-008",
+      "status": "fail",
+      "fix_hint": "Ensure external walls form a closed loop around Level 1 spaces; wall endpoints should connect with gaps <= 20 mm (0.02 m).",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    },
+    {
+      "requirement_id": "REQ-009",
+      "status": "fail",
+      "fix_hint": "Ensure wall/slab/roof representations are volumetric solids with non-zero thickness so computed volume > 0 for each element.",
+      "evidence": {
+        "tool": "execute_ifc_code_tool",
+        "output": null
+      }
+    }
+  ]
+}

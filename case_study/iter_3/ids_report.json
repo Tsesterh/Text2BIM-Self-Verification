@@ -1,0 +1,66 @@
+Two-storey timber house (IDS plan)
+Building + storeys
+    Applies to:
+        All IfcBuilding data
+    Requirements:
+        The Name shall be provided
+        The LongName shall be provided
+ - #11=IfcBuilding('1dknHU7a9DP9TaOtDkLDOT',$,'Wood House',$,$,$,$,$,$,$,$,$)
+Exactly two building storeys
+    Applies to:
+        All IfcBuildingStorey data
+    Requirements:
+        The Name shall be provided
+        The Elevation shall be provided
+Spaces (rooms) exist and are named
+    Applies to:
+        All IfcSpace data
+    Requirements:
+        The Name shall be provided
+        The LongName shall be provided
+ - #2302=IfcSpace('3VI6FYgUL5mgr2jVcU34Ty',#2301,'L1_Room_1',$,$,#2305,#2318,$,$,$,$)
+ - #2323=IfcSpace('0UcFHB6oX2OA2SwdPvGOEw',#2322,'L1_Room_2',$,$,#2326,#2339,$,$,$,$)
+ - #2344=IfcSpace('1G2Lii2JP24hDoSvtwQLtv',#2343,'L1_Room_3',$,$,#2347,#2360,$,$,$,$)
+ - #2365=IfcSpace('0S0ZNboTbAKxM837eYVG2T',#2364,'L1_Room_4',$,$,#2368,#2381,$,$,$,$)
+ - #2386=IfcSpace('0JWZ9sDGbB7PLGnLdFMbZ3',#2385,'L2_Room_1',$,$,#2389,#2402,$,$,$,$)
+ - #2407=IfcSpace('14_7llvJz9jhS1LHxz3n8A',#2406,'L2_Room_2',$,$,#2410,#2423,$,$,$,$)
+ - #2428=IfcSpace('087XhStjr2_fDUkT7yFXZg',#2427,'L2_Room_3',$,$,#2431,#2444,$,$,$,$)
+ - #2449=IfcSpace('29p53N_v1EUgcPukYzuCBZ',#2448,'L2_Room_4',$,$,#2452,#2465,$,$,$,$)
+Spaces are contained in a storey
+    Applies to:
+        All IfcSpace data
+    Requirements:
+        An element must have an IFCRELCONTAINEDINSPATIALSTRUCTURE relationship with an IfcBuildingStorey
+ - #2302=IfcSpace('3VI6FYgUL5mgr2jVcU34Ty',#2301,'L1_Room_1',$,$,#2305,#2318,$,$,$,$)
+ - #2323=IfcSpace('0UcFHB6oX2OA2SwdPvGOEw',#2322,'L1_Room_2',$,$,#2326,#2339,$,$,$,$)
+ - #2344=IfcSpace('1G2Lii2JP24hDoSvtwQLtv',#2343,'L1_Room_3',$,$,#2347,#2360,$,$,$,$)
+ - #2365=IfcSpace('0S0ZNboTbAKxM837eYVG2T',#2364,'L1_Room_4',$,$,#2368,#2381,$,$,$,$)
+ - #2386=IfcSpace('0JWZ9sDGbB7PLGnLdFMbZ3',#2385,'L2_Room_1',$,$,#2389,#2402,$,$,$,$)
+ - #2407=IfcSpace('14_7llvJz9jhS1LHxz3n8A',#2406,'L2_Room_2',$,$,#2410,#2423,$,$,$,$)
+ - #2428=IfcSpace('087XhStjr2_fDUkT7yFXZg',#2427,'L2_Room_3',$,$,#2431,#2444,$,$,$,$)
+ - #2449=IfcSpace('29p53N_v1EUgcPukYzuCBZ',#2448,'L2_Room_4',$,$,#2452,#2465,$,$,$,$)
+Timber material for walls
+    Applies to:
+        All IfcWall data
+    Requirements:
+        Shall have a material of Wood
+Timber material for slabs
+    Applies to:
+        All IfcSlab data
+    Requirements:
+        Shall have a material of Wood
+Roof is present
+    Applies to:
+        All IfcRoof data
+    Requirements:
+        The Name shall be provided
+Roof has gable predefined type
+    Applies to:
+        All IfcRoof data
+    Requirements:
+        The PredefinedType shall be GABLE_ROOF
+Timber material for roof
+    Applies to:
+        All IfcRoof data
+    Requirements:
+        Shall have a material of Wood

@@ -1,0 +1,7 @@
+openai>=1.0.0
+ifcopenshell
+ifctester
+langchain
+langgraph
+langchain-mcp-adapters
+langchain-openai

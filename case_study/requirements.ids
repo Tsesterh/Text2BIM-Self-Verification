@@ -1,0 +1,174 @@
+<ids xmlns="http://standards.buildingsmart.org/IDS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://standards.buildingsmart.org/IDS http://standards.buildingsmart.org/IDS/1.0/ids.xsd">
+    <info>
+        <title>Two-storey timber house (IDS plan)</title>
+        <version>1.0</version>
+        <description>IDS requirements for a simple two-level house with 4 rooms per level and timber construction, including a gable roof.</description>
+        <date>2026-02-12</date>
+    </info>
+    <specifications>
+        <specification name="Building + storeys" ifcVersion="IFC4">
+            <applicability minOccurs="1" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcBuilding</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>LongName</simpleValue>
+                    </name>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="Exactly two building storeys" ifcVersion="IFC4">
+            <applicability minOccurs="2" maxOccurs="2">
+                <entity>
+                    <name>
+                        <simpleValue>IfcBuildingStorey</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Elevation</simpleValue>
+                    </name>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="Spaces (rooms) exist and are named" ifcVersion="IFC4">
+            <applicability minOccurs="8" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSpace</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>LongName</simpleValue>
+                    </name>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="Spaces are contained in a storey" ifcVersion="IFC4">
+            <applicability minOccurs="8" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSpace</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <partOf relation="IFCRELCONTAINEDINSPATIALSTRUCTURE" cardinality="required">
+                    <entity>
+                        <name>
+                            <simpleValue>IfcBuildingStorey</simpleValue>
+                        </name>
+                    </entity>
+                </partOf>
+            </requirements>
+        </specification>
+        <specification name="Timber material for walls" ifcVersion="IFC4">
+            <applicability minOccurs="1" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcWall</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <material cardinality="required">
+                    <value>
+                        <simpleValue>Wood</simpleValue>
+                    </value>
+                </material>
+            </requirements>
+        </specification>
+        <specification name="Timber material for slabs" ifcVersion="IFC4">
+            <applicability minOccurs="1" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcSlab</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <material cardinality="required">
+                    <value>
+                        <simpleValue>Wood</simpleValue>
+                    </value>
+                </material>
+            </requirements>
+        </specification>
+        <specification name="Roof is present" ifcVersion="IFC4">
+            <applicability minOccurs="1" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRoof</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>Name</simpleValue>
+                    </name>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="Roof has gable predefined type" ifcVersion="IFC4">
+            <applicability minOccurs="1" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRoof</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <attribute cardinality="required">
+                    <name>
+                        <simpleValue>PredefinedType</simpleValue>
+                    </name>
+                    <value>
+                        <simpleValue>GABLE_ROOF</simpleValue>
+                    </value>
+                </attribute>
+            </requirements>
+        </specification>
+        <specification name="Timber material for roof" ifcVersion="IFC4">
+            <applicability minOccurs="1" maxOccurs="unbounded">
+                <entity>
+                    <name>
+                        <simpleValue>IfcRoof</simpleValue>
+                    </name>
+                </entity>
+            </applicability>
+            <requirements>
+                <material cardinality="required">
+                    <value>
+                        <simpleValue>Wood</simpleValue>
+                    </value>
+                </material>
+            </requirements>
+        </specification>
+    </specifications>
+</ids>
