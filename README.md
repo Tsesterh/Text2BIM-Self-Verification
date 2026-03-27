@@ -65,7 +65,12 @@ Install the Python dependencies:
 pip install -r requirements.txt
 ```
 
-The project expects an OpenAI-compatible API key for the LLM components:
+This project also depends on the MCP4IFC framework for Blender:
+https://github.com/Show2Instruct/ifc-bonsai-mcp
+
+After installing it, update the corresponding entry in `mcp.config.json` so it points to your local MCP4IFC setup.
+
+The LLM components require an OpenAI-compatible API key:
 
 ```bash
 export OPENAI_API_KEY="..."
@@ -101,8 +106,8 @@ Useful options:
 
 Two execution styles are supported for modification and verification:
 
-- `llm`: uses the local IFC tool wrappers from [src/tools_ifc.py](/Users/tobi/Documents/Projekte/Show2Instruct/Text2BIM-Self-Verification/src/tools_ifc.py)
-- `mcp`: uses MCP tools configured in [mcp.config.json](/Users/tobi/Documents/Projekte/Show2Instruct/Text2BIM-Self-Verification/mcp.config.json)
+- `llm`: uses the local IFC tool wrappers from [src/tools_ifc.py](/src/tools_ifc.py)
+- `mcp`: uses MCP tools configured in [mcp.config.json](mcp.config.json)
 
 The included MCP configuration is set up for a Blender MCP server and `openai:gpt-5.2`.
 
@@ -112,7 +117,7 @@ The repository contains a case-study folder corresponding to the paper's demonst
 
 > "Create a simple but realistic house, 4 rooms per level, 2 levels, made out of wood. The roof should be a gable roof."
 
-The [case_study](/Users/tobi/Documents/Projekte/Show2Instruct/Text2BIM-Self-Verification/case_study) directory includes:
+The [case_study](/case_study) directory includes:
 
 - the generated specification artifacts
 - intermediate IFC models across iterations
