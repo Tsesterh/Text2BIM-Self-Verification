@@ -1,6 +1,7 @@
 # A Self-Verification Framework Toward Reliable Text-to-BIM Generation
 
-Implementation of the paper *A Self-Verification Framework Toward Reliable Text-to-BIM Generation*.
+> Implementation of the paper *A Self-Verification Framework Toward Reliable Text-to-BIM Generation*.
+
 
 This repository realizes the paper's closed-loop Text-to-BIM workflow in code. A natural-language building prompt is translated into an IFC model and iteratively improved through two complementary validation channels:
 
@@ -10,6 +11,8 @@ This repository realizes the paper's closed-loop Text-to-BIM workflow in code. A
 The repository is therefore both a research prototype of the paper's framework and a runnable codebase for reproducing and extending the workflow.
 
 ## Framework Overview
+
+![Framework Overview](Framework.png)
 
 The implementation follows the paper's three-agent architecture:
 
